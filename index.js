@@ -6,12 +6,12 @@ module.exports = exports = (type, subtype, payload) => {
 		type = 'info';
 		subtype = 'message';
 	}
-	const log = JSON.stringify({
+	const log = {
 		time: new Date(),
 		type: type,
 		subtype: subtype,
 		payload: payload
-	});
-	console.info(log);
+	};
+	console.info(JSON.stringify(log));
 	return log;
 };
