@@ -12,6 +12,6 @@ module.exports = exports = (type, subtype, payload) => {
 		subtype: subtype,
 		payload: payload
 	};
-	console.info(JSON.stringify(log));
+	console.info(JSON.stringify(log, null, process.env.NODE_ENV === 'production' ? undefined : 4));
 	return log;
 };
