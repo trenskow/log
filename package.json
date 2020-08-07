@@ -1,6 +1,6 @@
 {
   "name": "@trenskow/log",
-  "version": "1.0.3",
+  "version": "1.1.0",
   "description": "Simple JSON log function.",
   "main": "index.js",
   "scripts": {
@@ -19,5 +19,11 @@
   "bugs": {
     "url": "https://github.com/trenskow/log/issues"
   },
-  "homepage": "https://github.com/trenskow/log#readme"
+  "homepage": "https://github.com/trenskow/log#readme",
+  "devDependencies": {
+    "eslint": "^7.6.0"
+  },
+  "dependencies": {
+    "@trenskow/object-map": "^0.1.0"
+  }
 }
