@@ -7,7 +7,7 @@ const
 const transform = (value) => {
 	if (Array.isArray(value)) return value.map(transform);
 	if (typeOf(value) === 'object') return objectMap.values(value, (_, value) => transform(value));
-	if (typeOf(value) === 'string') return value.replace(/(\?|&)(auth|app|password|secret)=.*?(&|$)/i, '$1$2=🤫$3');
+	if (typeOf(value) === 'string') return value.replace(/(\?|&)(auth|app|password|secret|api-key|authorization-token)=.*?(&|$)/i, '$1$2=🤫$3');
 	return value;
 };
 
