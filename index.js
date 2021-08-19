@@ -1,28 +1,58 @@
 'use strict';
 
 const
+	{ promises: { appendFile } } = require('fs');
+
+const
 	objectMap = require('@trenskow/object-map'),
-	typeOf = require('type-of');
+	merge = require('merge');
 
 const transform = (value) => {
 	if (Array.isArray(value)) return value.map(transform);
-	if (typeOf(value) === 'object') return objectMap.values(value, (_, value) => transform(value));
-	if (typeOf(value) === 'string') return value.replace(/(auth|app|password|secret|api-key|authorization-token)=.*?(&|$)/ig, '$1=🤫$2');
+	if (typeof value === 'object' && value !== null) return objectMap.values(value, (_, value) => transform(value));
+	if (typeof value === 'string') return value.replace(/(auth|app|password|secret|api-key|authorization-token)=.*?(&|$)/ig, '$1=🤫$2');
 	return value;
 };
 
-exports = module.exports = (type, subtype, payload) => {
-	if (!subtype && !payload) {
-		payload = type;
-		type = 'info';
-		subtype = 'message';
+exports = module.exports = async (level = 'info', message) => {
+
+	if (typeof level === 'object' && typeof message === 'undefined') {
+		message = level;
+		level = 'info';
 	}
-	const log = {
-		time: new Date(),
-		type: type,
-		subtype: subtype,
-		payload: transform(payload)
-	};
-	console.info(JSON.stringify(log, null, process.env.LOG_OUTPUT !== 'pretty' ? undefined : 4));
+	
+	const log = merge({ level }, transform(message));
+
+	let data;
+
+	switch (process.env.LOG_STYLE) {
+	case 'pretty':
+		data = JSON.stringify(log, null, parseInt(process.env.LOG_STYLE_PRETTY_INDENTATION_WIDTH) || 4);
+		break;
+	default:
+		data = JSON.stringify(log);
+		break;
+	}
+
+	data = `${data}\n`;
+
+	const output = process.env.LOG_OUTPUT || 'stdout';
+
+	switch (output) {
+	case 'stdout':
+	case 'stderr':
+		await new Promise((resolve, reject) => {
+			process[output].write(data, (err) => {
+				if (err) return reject(err);
+				resolve();
+			});
+		});
+		break;
+	default:
+		await appendFile(process.env.LOG_OUTPUT, data);
+		break;
+	}
+
 	return log;
+
 };

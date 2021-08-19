@@ -8,7 +8,7 @@ Just a simple function which lets you log JSON to the console.
 ````javascript
 const log = require('@trenskow/log');
 
-log('info', 'server', {
+await log('info', {
 	state: 'running',
 	port: process.env.PORT
 });
@@ -17,7 +17,7 @@ log('info', 'server', {
 This will output to stdout.
 
 ````json
-{"time":"2020-01-23T10:16:55.289Z","type":"info","subtype":"server","payload":{"state":"running","port":3000}}
+{"time":"2020-01-23T10:16:55.289Z","level":"info","state":"running","port":3000}
 ````
 
 ## Debugging
