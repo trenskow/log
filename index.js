@@ -1,11 +1,7 @@
-'use strict';
+import { appendFile } from 'fs/promises';
 
-const
-	{ promises: { appendFile } } = require('fs');
-
-const
-	objectMap = require('@trenskow/object-map'),
-	merge = require('merge');
+import objectMap from '@trenskow/object-map';
+import merge from 'merge';
 
 const transform = (value) => {
 	if (Array.isArray(value)) return value.map(transform);
@@ -14,13 +10,13 @@ const transform = (value) => {
 	return value;
 };
 
-exports = module.exports = async (level = 'info', message) => {
+export default async (level = 'info', message) => {
 
 	if (typeof level === 'object' && typeof message === 'undefined') {
 		message = level;
 		level = 'info';
 	}
-	
+
 	const log = merge({ level }, transform(message));
 
 	let data;
