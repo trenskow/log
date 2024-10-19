@@ -1,7 +1,7 @@
 import { appendFile } from 'fs/promises';
 
 import objectMap from '@trenskow/object-map';
-import merge from 'merge';
+import merge from '@trenskow/merge';
 
 const transform = (value) => {
 	if (Array.isArray(value)) return value.map(transform);
