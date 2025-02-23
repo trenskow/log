@@ -22,10 +22,10 @@
 	},
 	"homepage": "https://github.com/trenskow/log#readme",
 	"devDependencies": {
-		"@eslint/eslintrc": "^3.2.0",
+		"@eslint/eslintrc": "^3.3.0",
 		"@eslint/js": "^9.13.0",
-		"eslint": "^9.19.0",
-		"globals": "^15.14.0"
+		"eslint": "^9.21.0",
+		"globals": "^15.15.0"
 	},
 	"dependencies": {
 		"@trenskow/merge": "^0.1.36",
