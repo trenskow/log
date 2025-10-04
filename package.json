@@ -28,7 +28,7 @@
 		"globals": "^16.4.0"
 	},
 	"dependencies": {
-		"@trenskow/merge": "^0.1.43",
+		"@trenskow/merge": "^0.1.45",
 		"@trenskow/object-map": "^0.1.0"
 	}
 }
