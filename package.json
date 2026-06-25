@@ -1,6 +1,6 @@
 {
 	"name": "@trenskow/log",
-	"version": "2.1.50",
+	"version": "2.1.51",
 	"description": "Simple JSON log function.",
 	"main": "index.js",
 	"type": "module",
